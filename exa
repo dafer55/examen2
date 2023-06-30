@@ -1,0 +1,58 @@
+
+------------------------------TABLA 1
+CREATE TABLE AAA1(
+ID_pro NUMBER (10),
+NOMBRE VARCHAR (30),
+PRECIO VARCHAR (30),
+NUM_TIPO VARCHAR(30),
+NUM_MARCA VARCHAR (30)
+);
+-----------------------------.-TABLA 2
+CREATE TABLE BBB2(
+ID_TIPO NUMBER (10),
+EL_TIPO VARCHAR (30)
+);
+------------------------------TABLA 3
+CREATE TABLE CCC3(
+ID_MARCA NUMBER (10),
+LA_MARCA VARCHAR (30)
+);
+
+
+
+INSERT INTO AAA1 VALUES('001','sandwich','20','001','001');
+INSERT INTO AAA1 VALUES('002','torta','40','002','002');
+select * from AAA1;
+drop table AAA1; 
+INSERT INTO BBB2 VALUES('001','pan');
+INSERT INTO BBB2 VALUES('002','bolillo');
+-----datos que no estan relaccionadas con la tabla1
+INSERT INTO BBB2 VALUES('076','cuban');
+INSERT INTO BBB2 VALUES('077','normal');
+INSERT INTO BBB2 VALUES('078','sencillo');
+INSERT INTO BBB2 VALUES('079','no');
+INSERT INTO BBB2 VALUES('080','');
+
+---- datos que no estan relaccionadas con la tabla1
+INSERT INTO CCC3 VALUES('076','bimbo');
+INSERT INTO CCC3 VALUES('001','char');
+INSERT INTO CCC3 VALUES('002','cocola');
+INSERT INTO CCC3 VALUES('077','coca');
+INSERT INTO CCC3 VALUES('078','pepsi');
+INSERT INTO CCC3 VALUES('079','free');
+INSERT INTO CCC3 VALUES('080','bubu');
+
+
+select*from  AAA1  JOIN BBB2  on ID_pro = ID_TIPO JOIN CCC3  ON ID_pro = ID_MARCA;
+
+select NOMBRE,LA_MARCA from AAA1  inner JOIN CCC3  ON ID_pro = ID_MARCA;
+
+select*from AAA1  left JOIN BBB2  ON ID_pro = ID_TIPO  and  NUM_TIPO = EL_TIPO;
+
+select*from AAA1  right JOIN CCC3  ON ID_pro = ID_MARCA  and  NUM_MARCA = LA_MARCA;
+
+select*from AAA1 Full JOIN BBB2  ON ID_pro = ID_TIPO and  NUM_TIPO = EL_TIPO Full JOIN CCC3 ON ID_pro = ID_MARCA and  NUM_MARCA = LA_MARCA
+where  NUM_TIPO is  null or EL_TIPO is null or LA_MARCA is null  ;
+
+SELECT EL_TIPO FROM AAA1 JOIN BBB2 ON NUM_TIPO = ID_TIPO JOIN CCC3 ON NUM_MARCA =ID_MARCA
+where EL_TIPO LIKE 'b%' or EL_TIPO LIKE 'p%';
